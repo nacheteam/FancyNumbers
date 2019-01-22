@@ -25,7 +25,15 @@ def discoverPythagorasTriples(limit):
     limit in one of the positions a,b,c. It prints the Pythagoras triples discovered.
     @param limit Integer that represents the limit for a,b, and c
     '''
-    all_choices = np.array(list(itertools.product(list(range(limit)), repeat=3)))
+    n_slices = limit//100
+    for n in range(n_slices):
+        all_choices = np.array(list(itertools.product(list(range(n*100,(n+1)*100)), repeat=3)))
+        results = checkPythagorasTripleArray(all_choices)
+        for i in range(len(results)):
+            if results[i]:
+                print("The triple (" + str(all_choices[i][0]) + "," + str(all_choices[i][1]) + "," + str(all_choices[i][2]) + ") is Pythagoric")
+
+    all_choices = np.array(list(itertools.product(list(range(n_slices*100,limit)), repeat=3)))
     results = checkPythagorasTripleArray(all_choices)
     for i in range(len(results)):
         if results[i]:
