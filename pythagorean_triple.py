@@ -1,6 +1,8 @@
 import numpy as np
 import itertools
 
+STEP=50
+
 def checkPythagorasTriple(triple):
     '''
     @brief This function checks whether the triple a,b,c achieves a^2+b^2=c^2
@@ -25,15 +27,15 @@ def discoverPythagorasTriples(limit):
     limit in one of the positions a,b,c. It prints the Pythagoras triples discovered.
     @param limit Integer that represents the limit for a,b, and c
     '''
-    n_slices = limit//100
+    n_slices = limit//STEP
     for n in range(n_slices):
-        all_choices = np.array(list(itertools.product(list(range(n*100,(n+1)*100)), repeat=3)))
+        all_choices = np.array(list(itertools.product(list(range(n*STEP,(n+1)*STEP)), repeat=3)))
         results = checkPythagorasTripleArray(all_choices)
         for i in range(len(results)):
             if results[i]:
                 print("The triple (" + str(all_choices[i][0]) + "," + str(all_choices[i][1]) + "," + str(all_choices[i][2]) + ") is Pythagoric")
 
-    all_choices = np.array(list(itertools.product(list(range(n_slices*100,limit)), repeat=3)))
+    all_choices = np.array(list(itertools.product(list(range(n_slices*STEP,limit)), repeat=3)))
     results = checkPythagorasTripleArray(all_choices)
     for i in range(len(results)):
         if results[i]:
